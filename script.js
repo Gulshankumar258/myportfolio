@@ -131,7 +131,9 @@ const Toast = {
     toast.className = 'toast';
     const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', info: 'fa-circle-info', warning: 'fa-triangle-exclamation' };
     const titles = { success: 'Success', error: 'Error', info: 'Info', warning: 'Warning' };
-    toast.innerHTML = `<i class="fa-solid ${icons[type]} toast-icon ${type}"></i><div class="toast-content"><div class="toast-title">${title || titles[type]}</div><div class="toast-message">${message}</div></div><button class="toast-close" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>`;
+    const safeMessage = String(message).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const safeTitle = String(title || titles[type]).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    toast.innerHTML = `<i class="fa-solid ${icons[type]} toast-icon ${type}"></i><div class="toast-content"><div class="toast-title">${safeTitle}</div><div class="toast-message">${safeMessage}</div></div><button class="toast-close" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>`;
     this.container.appendChild(toast);
     requestAnimationFrame(() => toast.classList.add('show'));
     setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 500); }, 5000);
@@ -168,17 +170,22 @@ class TextScramble {
     for (let i = 0; i < this.queue.length; i++) {
       let { from, to, start, end } = this.queue[i];
       let char = this.queue[i].char;
-      if (this.frame >= end) { complete++; output += to; }
+      if (this.frame >= end) { complete++; output += this.escapeHtml(to); }
       else if (this.frame >= start) {
         if (!char || Math.random() < 0.28) { char = this.randomChar(); this.queue[i].char = char; }
-        output += `<span style="color: var(--magenta)">${char}</span>`;
-      } else { output += from; }
+        output += `<span style="color: var(--magenta)">${this.escapeHtml(char)}</span>`;
+      } else { output += this.escapeHtml(from); }
     }
     this.el.innerHTML = output;
     if (complete === this.queue.length) { this.isAnimating = false; this.resolve(); }
     else { this.frame++; requestAnimationFrame(() => this.update()); }
   }
   randomChar() { return this.chars[Math.floor(Math.random() * this.chars.length)]; }
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
 }
 
 (function initScramble() {
@@ -735,7 +742,10 @@ function closeCvModal() { cvModal.classList.remove('open'); document.body.style.
             document.body.appendChild(link); link.click(); link.remove();
           } else { openCvModal(); }
         })
-        .catch(() => openCvModal());
+        .catch((err) => {
+          console.error('CV fetch error:', err);
+          openCvModal();
+        });
     });
   }
 });
@@ -821,7 +831,5 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Console easter egg
-console.log('%c Gulshan Kumar Portfolio ', 'background: linear-gradient(90deg, #00ffff, #ff00ff); color: #0a0a0f; font-size: 22px; font-weight: bold; padding: 12px 24px; border-radius: 12px; text-shadow: none;');
-console.log('%c Built with curiosity, code, and a lot of coffee. ', 'color: #00ffff; font-size: 14px; font-family: monospace;');
-console.log('%c Want to see how it works? Check the source! ', 'color: #ff00ff; font-size: 12px; font-family: monospace;');
+// Console easter egg (disabled in production)
+// console.log('%c Gulshan Kumar Portfolio ', 'background: linear-gradient(90deg, #00ffff, #ff00ff); color: #0a0a0f; font-size: 22px; font-weight: bold; padding: 12px 24px; border-radius: 12px; text-shadow: none;');
