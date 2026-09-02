@@ -39,20 +39,22 @@ function isInViewport(el) {
   const dot = document.getElementById('cursorDot');
   const outline = document.getElementById('cursorOutline');
   const glow = document.getElementById('cursorGlow');
-  const trailCount = 5;
+  const trailCount = 6;
   const trails = [];
   for (let i = 0; i < trailCount; i++) {
     const trail = document.createElement('div');
     trail.className = 'cursor-trail';
-    trail.style.width = (6 - i) + 'px';
-    trail.style.height = (6 - i) + 'px';
-    trail.style.opacity = 0.3 - (i * 0.05);
+    trail.style.width = (5 - i * 0.6) + 'px';
+    trail.style.height = (5 - i * 0.6) + 'px';
+    trail.style.opacity = 0.25 - (i * 0.04);
     document.body.appendChild(trail);
     trails.push({ el: trail, x: 0, y: 0 });
   }
   let mouseX = 0, mouseY = 0;
   let dotX = 0, dotY = 0;
   let outlineX = 0, outlineY = 0;
+  let isClicking = false;
+
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
@@ -61,20 +63,31 @@ function isInViewport(el) {
     glow.classList.add('active');
   });
   document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+
+  // Click effects
+  document.addEventListener('mousedown', () => {
+    isClicking = true;
+    document.body.classList.add('clicking');
+  });
+  document.addEventListener('mouseup', () => {
+    isClicking = false;
+    document.body.classList.remove('clicking');
+  });
+
   function animateCursor() {
     if (document.hidden) { requestAnimationFrame(animateCursor); return; }
-    dotX += (mouseX - dotX) * 0.25;
-    dotY += (mouseY - dotY) * 0.25;
-    outlineX += (mouseX - outlineX) * 0.12;
-    outlineY += (mouseY - outlineY) * 0.12;
+    dotX += (mouseX - dotX) * 0.3;
+    dotY += (mouseY - dotY) * 0.3;
+    outlineX += (mouseX - outlineX) * 0.15;
+    outlineY += (mouseY - outlineY) * 0.15;
     dot.style.left = dotX + 'px';
     dot.style.top = dotY + 'px';
     outline.style.left = outlineX + 'px';
     outline.style.top = outlineY + 'px';
     let prevX = dotX, prevY = dotY;
     trails.forEach((trail, i) => {
-      trail.x += (prevX - trail.x) * (0.3 - i * 0.05);
-      trail.y += (prevY - trail.y) * (0.3 - i * 0.05);
+      trail.x += (prevX - trail.x) * (0.35 - i * 0.04);
+      trail.y += (prevY - trail.y) * (0.35 - i * 0.04);
       trail.el.style.left = trail.x + 'px';
       trail.el.style.top = trail.y + 'px';
       trail.el.style.transform = 'translate(-50%, -50%)';
@@ -84,7 +97,9 @@ function isInViewport(el) {
     requestAnimationFrame(animateCursor);
   }
   animateCursor();
-  document.querySelectorAll('a, button, .magnetic, input, textarea, .card, .project-link').forEach(el => {
+
+  // Hover detection
+  document.querySelectorAll('a, button, .magnetic, input, textarea, .card, .project-link, .hero-photo-btn').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
   });
