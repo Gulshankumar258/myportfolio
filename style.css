@@ -163,13 +163,97 @@ img { max-width:100%; display:block; }
 
 #particles { position:fixed; inset:0; z-index:0; pointer-events:none; }
 
-.cursor-dot { position:fixed; top:0; left:0; width:8px; height:8px; background:var(--cyan); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width 0.2s, height:0.2s, background 0.2s; mix-blend-mode:difference; }
-.cursor-outline { position:fixed; top:0; left:0; width:40px; height:40px; border:1.5px solid var(--cyan); border-radius:50%; pointer-events:none; z-index:9997; transform:translate(-50%,-50%); transition:width 0.3s, height:0.3s, border-color 0.3s, opacity 0.3s; opacity:0.4; }
-.cursor-glow { position:fixed; top:0; left:0; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,var(--glow-cyan) 0%,transparent 70%); transform:translate(-50%,-50%); pointer-events:none; z-index:1; mix-blend-mode:screen; opacity:0; transition:opacity 0.4s ease; }
-.cursor-glow.active { opacity:1; }
-body.hovering .cursor-dot { width:16px; height:16px; background:var(--magenta); }
-body.hovering .cursor-outline { width:56px; height:56px; border-color:var(--magenta); opacity:0.7; }
-@media (hover:none) { .cursor-dot,.cursor-outline,.cursor-glow { display:none; } body { cursor:auto; } }
+/* Custom Cursor - Neon Ring Style */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
+}
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, border-color 0.25s, opacity 0.25s, transform 0.1s;
+  opacity: 0.6;
+}
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-cyan) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cursor-glow.active { opacity: 1; }
+
+/* Cursor trail particles */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background: var(--cyan);
+  pointer-events: none;
+  z-index: 9996;
+  transform: translate(-50%, -50%);
+  filter: blur(1px);
+}
+
+/* Hover state - interactive elements */
+body.hovering .cursor-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--magenta);
+  box-shadow: 0 0 15px var(--magenta), 0 0 30px var(--magenta);
+}
+body.hovering .cursor-outline {
+  width: 48px;
+  height: 48px;
+  border-color: var(--magenta);
+  opacity: 0.8;
+  box-shadow: 0 0 15px var(--glow-magenta);
+}
+
+/* Click state */
+body.clicking .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.6);
+}
+body.clicking .cursor-outline {
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+/* Hide default cursor on desktop */
+@media (hover: hover) {
+  body { cursor: none; }
+  a, button, .magnetic, input, textarea, .card, .project-link, .cursor-pointer { cursor: none; }
+}
+@media (hover: none) {
+  .cursor-dot, .cursor-outline, .cursor-glow, .cursor-trail { display: none; }
+  body { cursor: auto; }
+}
 
 .navbar,.hero,main,footer,.back-to-top,.lightbox,.modal { position:relative; z-index:2; }
 
