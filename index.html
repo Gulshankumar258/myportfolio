@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gulshan Kumar — Portfolio</title>
+<meta name="description" content="Gulshan Kumar — B.Tech CSE student at Lovely Professional University.">
+<meta name="keywords" content="Gulshan Kumar, Portfolio, Web Developer, Smart Agriculture, LPU, B.Tech CSE">
+<meta name="author" content="Gulshan Kumar">
+<meta property="og:title" content="Gulshan Kumar — Portfolio">
+<meta property="og:description" content="B.Tech CSE student at LPU building Smart Agriculture solutions and creative web experiences.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="color-scheme" content="dark light">
+
+<link rel="icon" id="dynamicFavicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2300ffff'/%3E%3Cstop offset='100%25' stop-color='%23ff00ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='%230a0a0f'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='700' text-anchor='middle' fill='url(%23g)'%3EG%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <div class="preloader-logo">G<span style="color:var(--magenta)">.</span></div>
+    <div class="preloader-bar"><div class="preloader-fill" id="preloaderFill"></div></div>
+    <div class="preloader-text" id="preloaderText">Initializing...</div>
+  </div>
+</div>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="tech-orb tech-orb-1" aria-hidden="true"></div>
+<div class="tech-orb tech-orb-2" aria-hidden="true"></div>
+<div class="tech-orb tech-orb-3" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="digital-rain" aria-hidden="true"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-outline" id="cursorOutline" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo magnetic" data-scramble>Gulshan<span>.</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="nav-link magnetic" data-scramble>About</a></li>
+      <li><a href="#skills" class="nav-link magnetic" data-scramble>Skills</a></li>
+      <li><a href="#softskills" class="nav-link magnetic" data-scramble>Soft Skills</a></li>
+      <li><a href="#projects" class="nav-link magnetic" data-scramble>Projects</a></li>
+      <li><a href="#certificates" class="nav-link magnetic" data-scramble>Certificates</a></li>
+      <li><a href="#achievements" class="nav-link magnetic" data-scramble>Achievements</a></li>
+      <li><a href="#contact" class="nav-link magnetic" data-scramble>Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="assets/cv.pdf" class="btn btn-cv magnetic" id="cvDownload" download aria-label="Download CV"><i class="fa-solid fa-file-arrow-down"></i> CV</a>
+      <button class="theme-toggle magnetic" id="themeToggle" aria-label="Toggle light and dark theme"><i class="fa-solid fa-seedling"></i></button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-vine" aria-hidden="true">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none">
+      <path id="heroVinePath" d="M0,220 C 200,120 300,280 500,180 S 800,60 1000,150 S 1150,220 1200,140" fill="none" stroke="url(#vineGradient)" stroke-width="3" stroke-linecap="round"/>
+      <defs><linearGradient id="vineGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--magenta)"/></linearGradient></defs>
+    </svg>
+  </div>
+  <div class="orb orb-cyan" aria-hidden="true"></div>
+  <div class="orb orb-magenta" aria-hidden="true"></div>
+  <div class="orb orb-gold" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-photo parallax" data-speed="0.05">
+      <div class="hero-photo-ring"></div>
+      <div class="hero-photo-ring-secondary"></div>
+      <div class="hero-photo-ring-tertiary"></div>
+      <button type="button" class="hero-photo-btn" id="heroPhotoBtn" aria-label="View full profile photo" data-full="images/profile.jpg" data-caption="Gulshan Kumar">
+        <img src="images/profile.jpg" alt="Photo of Gulshan Kumar" loading="eager">
+        <div class="hero-photo-overlay"><i class="fa-solid fa-expand"></i></div>
+      </button>
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow" data-scramble><i class="fa-solid fa-seedling"></i> B.Tech CSE (Core) · Lovely Professional University</p>
+      <h1 class="gradient-text glitch-text" data-text="Greetings, I'm Gulshan">Greetings, I'm Gulshan</h1>
+      <p class="hero-sub"><span id="typewriter"></span><span class="typewriter-cursor">|</span></p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary magnetic">See my work</a>
+        <a href="#contact" class="btn btn-ghost magnetic">Get in touch</a>
+        <a href="assets/cv.pdf" class="btn btn-cv-large magnetic" id="cvDownloadHero" download><i class="fa-solid fa-download"></i> Download CV</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/Hacker-Pikachu" target="_blank" rel="noopener noreferrer" class="social-icon magnetic" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/gulshan-kumar-610703322" target="_blank" rel="noopener noreferrer" class="social-icon magnetic" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:gun9006481@gmail.com" class="social-icon magnetic" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.instagram.com/_mr_devil_x_i?igsi=MXc5YXZ4NHRzbnlxdg==" target="_blank" rel="noopener noreferrer" class="social-icon magnetic" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <a href="#about" class="scroll-cue magnetic" aria-label="Scroll to About section">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span class="scroll-text">Scroll</span>
+  </a>
+</header>
+
+<main id="main">
+  <section id="about" class="section reveal">
+    <p class="eyebrow" data-scramble>01 · Who I am</p>
+    <h2 data-scramble>About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-text">I am Gulshan, currently pursuing a <strong>B.Tech in Computer Science & Engineering (Core)</strong> at <strong>Lovely Professional University, Phagwara, Punjab</strong> (2026–2029 batch). I completed my <strong>Diploma in Computer Science</strong> from <strong>Government Polytechnic Gaya, Bihar</strong> (2023–2026 batch) with <strong>7.6 CGPA</strong>, where I gained hands-on experience in <strong>Programming in Python, Web Development, Java, C, and Database Management</strong>.</p>
+        <p class="section-text">I am passionate about learning new technologies, improving my programming skills, and building practical projects that combine technology with real-world impact. As a student, I am continuously exploring different areas of computer science and working to develop my technical and problem-solving abilities.</p>
+        <div class="about-actions">
+          <a href="assets/cv.pdf" class="btn btn-primary magnetic" download id="cvDownloadAbout"><i class="fa-solid fa-file-arrow-down"></i> Download My CV</a>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-stats">
+          <div class="stat-card reveal"><span class="stat-num" data-count="7.6">0</span><span class="stat-suffix"> CGPA</span><span class="stat-label">Diploma Score</span></div>
+          <div class="stat-card reveal"><span class="stat-num" data-count="3">0</span><span class="stat-suffix">+</span><span class="stat-label">Certificates Earned</span></div>
+          <div class="stat-card reveal"><span class="stat-num" data-count="1">0</span><span class="stat-suffix">+</span><span class="stat-label">Projects Built</span></div>
+          <div class="stat-card reveal"><span class="stat-num" data-count="0">0</span><span class="stat-suffix">+</span><span class="stat-label">Years Experience</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section reveal">
+    <p class="eyebrow" data-scramble>02 · Education</p>
+    <h2 data-scramble>Education</h2>
+    <div class="service-grid">
+      <div class="service-card tilt reveal">
+        <div class="service-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3>Bachelor of Technology (B.Tech) in Computer Science & Engineering (Core)</h3>
+        <p>Lovely Professional University, Phagwara, Punjab</p>
+        <p style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.85rem; margin: 8px 0;"><i class="fa-solid fa-calendar"></i> 2026 — 2029 (Currently Studying)</p>
+        <div class="service-tags"><span class="tag">Ongoing</span><span class="tag">Core CSE</span><span class="tag">LPU</span></div>
+      </div>
+      <div class="service-card tilt reveal">
+        <div class="service-icon"><i class="fa-solid fa-certificate"></i></div>
+        <h3>Diploma in Computer Science</h3>
+        <p>Government Polytechnic Gaya, Bihar</p>
+        <p style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.85rem; margin: 8px 0;"><i class="fa-solid fa-calendar"></i> 2023 — 2026 &nbsp;|&nbsp; <i class="fa-solid fa-star"></i> 7.6 CGPA</p>
+        <div class="service-tags"><span class="tag">Python</span><span class="tag">Web Dev</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">DBMS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section reveal">
+    <p class="eyebrow" data-scramble>03 · Toolkit</p>
+    <h2 data-scramble>Technical Skills</h2>
+    <div class="skills-layout">
+      <div class="skill-bars">
+        <div class="skill-bar reveal"><div class="skill-head"><i class="fa-brands fa-python"></i> Python <span>60%</span></div><div class="skill-track"><div class="skill-fill" data-level="60"></div></div></div>
+        <div class="skill-bar reveal"><div class="skill-head"><i class="fa-brands fa-java"></i> Java <span>40%</span></div><div class="skill-track"><div class="skill-fill" data-level="40"></div></div></div>
+        <div class="skill-bar reveal"><div class="skill-head"><i class="fa-solid fa-code"></i> Web Development <span>50%</span></div><div class="skill-track"><div class="skill-fill" data-level="50"></div></div></div>
+        <div class="skill-bar reveal"><div class="skill-head"><i class="fa-solid fa-database"></i> Database Management <span>30%</span></div><div class="skill-track"><div class="skill-fill" data-level="30"></div></div></div>
+      </div>
+      <div class="skill-radar reveal">
+        <div class="radar-container"><canvas id="radarChart" width="300" height="300"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="softskills" class="section reveal">
+    <p class="eyebrow" data-scramble>04 · Beyond code</p>
+    <h2 data-scramble>Soft Skills</h2>
+    <p class="hint-text top-hint"><i class="fa-solid fa-hand-pointer"></i> Click any card to flip it and read more.</p>
+    <div class="skills-grid soft-skill-cards">
+      <button type="button" class="flip-card soft-card reveal" aria-pressed="false">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><i class="fa-solid fa-hand-fist"></i><span>Self-Reliance</span><span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span></div>
+          <div class="flip-card-back"><i class="fa-solid fa-hand-fist"></i><p>Taking initiative and responsibility for my own learning and work, solving problems independently without constant guidance.</p></div>
+        </div>
+      </button>
+      <button type="button" class="flip-card soft-card reveal" aria-pressed="false">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><i class="fa-solid fa-bolt"></i><span>Persistence</span><span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span></div>
+          <div class="flip-card-back"><i class="fa-solid fa-bolt"></i><p>Staying committed to goals despite setbacks, continuously pushing through challenges until the solution is found.</p></div>
+        </div>
+      </button>
+      <button type="button" class="flip-card soft-card reveal" aria-pressed="false">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><i class="fa-solid fa-user-gear"></i><span>Independent Working</span><span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span></div>
+          <div class="flip-card-back"><i class="fa-solid fa-user-gear"></i><p>Effectively managing tasks and delivering quality results while working autonomously with minimal supervision.</p></div>
+        </div>
+      </button>
+      <button type="button" class="flip-card soft-card reveal" aria-pressed="false">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><i class="fa-solid fa-arrows-spin"></i><span>Adaptability</span><span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span></div>
+          <div class="flip-card-back"><i class="fa-solid fa-arrows-spin"></i><p>Quickly adjusting to new technologies, environments, and project requirements with flexibility and openness.</p></div>
+        </div>
+      </button>
+      <button type="button" class="flip-card soft-card reveal" aria-pressed="false">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><i class="fa-solid fa-bullseye"></i><span>Goal-Oriented</span><span class="flip-hint"><i class="fa-solid fa-rotate"></i> Flip</span></div>
+          <div class="flip-card-back"><i class="fa-solid fa-bullseye"></i><p>Setting clear objectives and systematically working toward them with focus, discipline, and measurable progress.</p></div>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <section id="projects" class="section reveal">
+    <p class="eyebrow" data-scramble>05 · Selected work</p>
+    <h2 data-scramble>Projects</h2>
+    <p class="hint-text top-hint"><i class="fa-solid fa-hand-pointer"></i> Click a project card for full details.</p>
+    <div class="project-filter" id="projectFilter">
+      <button class="filter-btn active magnetic" data-filter="all">All</button>
+      <button class="filter-btn magnetic" data-filter="iot">IoT</button>
+    </div>
+    <div class="project-cards" id="projectGrid">
+      <div class="card project-card tilt reveal" data-category="iot" data-details="An IoT-based farming solution that continuously monitors soil moisture, temperature, and other climate conditions using connected sensors. Live sensor readings feed into automation logic so irrigation and alerts can respond in real time, aiming to improve yield efficiency and reduce manual monitoring.">
+        <div class="project-image">
+          <div class="project-image-placeholder"><i class="fa-solid fa-seedling"></i></div>
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="#" class="project-link magnetic" aria-label="View Code"><i class="fa-brands fa-github"></i></a>
+              <a href="#" class="project-link magnetic" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-icon"><i class="fa-solid fa-seedling"></i></div>
+          <h3>Smart Agriculture</h3>
+          <p>IoT-based farming solution that monitors soil and climate conditions to improve yield efficiency using real-time sensor data.</p>
+          <div class="tag-row"><span class="tag">IoT</span><span class="tag">Sensors</span><span class="tag">Automation</span></div>
+          <button type="button" class="project-view-more magnetic">View details <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="card project-card placeholder-card reveal coming-soon-card">
+        <div class="coming-soon-animation">
+          <div class="project-icon"><i class="fa-solid fa-rocket"></i></div>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring delay-1"></div>
+          <div class="pulse-ring delay-2"></div>
+        </div>
+        <h3>Coming Soon...</h3>
+        <p>More exciting projects are in the pipeline. Stay tuned for upcoming work in web development, IoT, and mobile applications.</p>
+        <div class="tag-row"><span class="tag">Upcoming</span><span class="tag">In Progress</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates" class="section reveal">
+    <p class="eyebrow" data-scramble>06 · Proof of work</p>
+    <h2 data-scramble>Certificates</h2>
+    <div class="cert-slider-wrapper">
+      <button class="cert-nav cert-prev magnetic" id="certPrev" aria-label="Previous certificate"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="cert-slider" id="certSlider">
+        <button class="card cert-card" data-full="assets/certificates/python-training.jpg" data-caption="Python 3.4.3 Training — IIT Bombay (Spoken Tutorial) — Score: 90%">
+          <div class="cert-image-wrapper"><img src="assets/certificates/python-training.jpg" alt="Python 3.4.3 Training Certificate from IIT Bombay Spoken Tutorial" loading="lazy"></div>
+          <span class="cert-caption">Python Training — IIT Bombay · 90%</span>
+        </button>
+        <button class="card cert-card" data-full="assets/certificates/java-training.jpg" data-caption="Java Training — IIT Bombay (Spoken Tutorial) — Score: 77.50%">
+          <div class="cert-image-wrapper"><img src="assets/certificates/java-training.jpg" alt="Java Training Certificate from IIT Bombay Spoken Tutorial" loading="lazy"></div>
+          <span class="cert-caption">Java Training — IIT Bombay · 77.5%</span>
+        </button>
+        <button class="card cert-card" data-full="assets/certificates/internship-webdev.jpg" data-caption="Web Development Internship — C-TECH INFOMEDIA, Patna — HTML & CSS">
+          <div class="cert-image-wrapper"><img src="assets/certificates/internship-webdev.jpg" alt="Web Development Internship Certificate from C-TECH INFOMEDIA" loading="lazy"></div>
+          <span class="cert-caption">Web Dev Internship — C-TECH INFOMEDIA</span>
+        </button>
+        <button class="card cert-card cert-coming-soon" data-full="" data-caption="More certifications coming soon...">
+          <div class="cert-image-wrapper cert-coming-soon-wrapper">
+            <div class="cert-coming-soon-content">
+              <i class="fa-solid fa-hourglass-half"></i>
+              <span>Update Soon...</span>
+            </div>
+          </div>
+          <span class="cert-caption">More Coming Soon</span>
+        </button>
+      </div>
+      <button class="cert-nav cert-next magnetic" id="certNext" aria-label="Next certificate"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="cert-dots" id="certDots"></div>
+    <p class="hint-text">* Click any certificate to view it full-size. Use arrows to navigate.</p>
+  </section>
+
+  <section id="achievements" class="section reveal">
+    <p class="eyebrow" data-scramble>07 · Milestones</p>
+    <h2 data-scramble>Achievements</h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2026 — Present</span>
+          <h3>B.Tech in Computer Science & Engineering (Core)</h3>
+          <p>Lovely Professional University, Phagwara, Punjab — Currently pursuing B.Tech CSE (Core) with focus on emerging technologies and advanced computing.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2023 — 2026</span>
+          <h3>Diploma in Computer Science — 7.6 CGPA</h3>
+          <p>Government Polytechnic Gaya, Bihar — Completed Diploma in Computer Science with hands-on project experience. Relevant subjects: Programming in Python, Web Development, Java, C, and Database Management.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2023</span>
+          <h3>LPU Fest Participation</h3>
+          <p>Represented my department in college-wide fests and technical events, enhancing teamwork and exposure.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2024</span>
+          <h3>Smart Agriculture Project</h3>
+          <p>Built an IoT-based agriculture monitoring system as a flagship innovation project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section reveal">
+    <p class="eyebrow" data-scramble>08 · Let's talk</p>
+    <h2 data-scramble>Contact</h2>
+    <p class="section-text">Have a project in mind or just want to say hi? Send a message below or reach out directly.</p>
+    <div class="contact-layout">
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+            <span class="error-msg" data-for="name"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            <span class="error-msg" data-for="email"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me a bit about it..." required></textarea>
+          <span class="error-msg" data-for="message"></span>
+        </div>
+        <button type="submit" class="btn btn-primary magnetic submit-btn">
+          <span class="btn-text">Send message</span>
+          <span class="btn-loader"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+        </button>
+      </form>
+      <div class="contact-info">
+        <div class="info-card reveal">
+          <i class="fa-solid fa-envelope"></i>
+          <h4>Email</h4>
+          <div class="info-card-row">
+            <a href="mailto:gun9006481@gmail.com">gun9006481@gmail.com</a>
+            <button type="button" class="copy-btn magnetic" id="copyEmailBtn" data-copy="gun9006481@gmail.com" aria-label="Copy email address"><i class="fa-regular fa-copy"></i></button>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <i class="fa-brands fa-linkedin"></i>
+          <h4>LinkedIn</h4>
+          <a href="https://www.linkedin.com/in/gulshan-kumar-610703322" target="_blank" rel="noopener noreferrer">linkedin.com/in/gulshan-kumar-610703322</a>
+        </div>
+        <div class="info-card reveal">
+          <i class="fa-brands fa-github"></i>
+          <h4>GitHub</h4>
+          <a href="https://github.com/Hacker-Pikachu" target="_blank" rel="noopener noreferrer">github.com/Hacker-Pikachu</a>
+        </div>
+        <div class="info-card reveal">
+          <i class="fa-solid fa-location-dot"></i>
+          <h4>Location</h4>
+          <span>Punjab, India</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <span class="footer-logo">Gulshan<span>.</span></span>
+      <p>Building the future, one line of code at a time.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#about" class="magnetic">About</a>
+      <a href="#skills" class="magnetic">Skills</a>
+      <a href="#projects" class="magnetic">Projects</a>
+      <a href="#contact" class="magnetic">Contact</a>
+    </div>
+    <div class="footer-socials">
+      <a href="https://github.com/Hacker-Pikachu" target="_blank" rel="noopener noreferrer" class="magnetic" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/gulshan-kumar-610703322" target="_blank" rel="noopener noreferrer" class="magnetic" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="mailto:gun9006481@gmail.com" class="magnetic" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Gulshan Kumar. Crafted with <i class="fa-solid fa-heart"></i> and a lot of <i class="fa-solid fa-mug-hot"></i>.</p>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top magnetic" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close magnetic" id="lightboxClose" aria-label="Close">&times;</button>
+  <div class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></div>
+  <img id="lightboxImg" src="" alt="">
+  <p id="lightboxCaption"></p>
+  <div class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></div>
+</div>
+
+<div class="modal" id="projectModal">
+  <div class="modal-backdrop" id="projectModalBackdrop"></div>
+  <div class="modal-content project-modal-content">
+    <button class="modal-close" id="projectModalClose" aria-label="Close project details">&times;</button>
+    <div class="project-modal-icon" id="projectModalIcon"><i class="fa-solid fa-diagram-project"></i></div>
+    <h3 id="projectModalTitle">Project title</h3>
+    <p id="projectModalDesc"></p>
+    <div class="tag-row" id="projectModalTags"></div>
+    <div class="project-modal-actions" id="projectModalLinks"></div>
+  </div>
+</div>
+
+<div class="modal" id="cvModal">
+  <div class="modal-backdrop" id="cvModalBackdrop"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="cvModalClose" aria-label="Close modal">&times;</button>
+    <div class="modal-icon"><i class="fa-solid fa-file-pdf"></i></div>
+    <h3>Download CV</h3>
+    <p>To enable CV download, place your resume PDF file at:</p>
+    <code class="modal-code">assets/cv.pdf</code>
+    <p class="modal-hint">Once added, the download buttons across the site will work automatically.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="cvModalDismiss">Got it</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
