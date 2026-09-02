@@ -33,27 +33,37 @@ function isInViewport(el) {
   return rect.top < window.innerHeight && rect.bottom > 0;
 }
 
-// Custom cursor with trail
+// Custom cursor with trail - Hacker Style
 (function initCustomCursor() {
   if (!window.matchMedia('(hover: hover)').matches) return;
+
   const dot = document.getElementById('cursorDot');
   const outline = document.getElementById('cursorOutline');
   const glow = document.getElementById('cursorGlow');
+
+  // Create red targeting dot
+  const target = document.createElement('div');
+  target.className = 'cursor-target';
+  document.body.appendChild(target);
+
+  // Create coordinate readout
+  const readout = document.createElement('div');
+  readout.className = 'cursor-readout';
+  document.body.appendChild(readout);
+
   const trailCount = 6;
   const trails = [];
   for (let i = 0; i < trailCount; i++) {
     const trail = document.createElement('div');
     trail.className = 'cursor-trail';
-    trail.style.width = (5 - i * 0.6) + 'px';
-    trail.style.height = (5 - i * 0.6) + 'px';
-    trail.style.opacity = 0.25 - (i * 0.04);
     document.body.appendChild(trail);
     trails.push({ el: trail, x: 0, y: 0 });
   }
+
   let mouseX = 0, mouseY = 0;
   let dotX = 0, dotY = 0;
   let outlineX = 0, outlineY = 0;
-  let isClicking = false;
+  let targetX = 0, targetY = 0;
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -61,29 +71,36 @@ function isInViewport(el) {
     glow.style.left = mouseX + 'px';
     glow.style.top = mouseY + 'px';
     glow.classList.add('active');
+    readout.textContent = `x: ${mouseX.toString().padStart(4, '0')}  y: ${mouseY.toString().padStart(4, '0')}`;
   });
-  document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+  document.addEventListener('mouseleave', () => {
+    glow.classList.remove('active');
+    readout.textContent = '';
+  });
 
   // Click effects
-  document.addEventListener('mousedown', () => {
-    isClicking = true;
-    document.body.classList.add('clicking');
-  });
-  document.addEventListener('mouseup', () => {
-    isClicking = false;
-    document.body.classList.remove('clicking');
-  });
+  document.addEventListener('mousedown', () => document.body.classList.add('clicking'));
+  document.addEventListener('mouseup', () => document.body.classList.remove('clicking'));
 
   function animateCursor() {
     if (document.hidden) { requestAnimationFrame(animateCursor); return; }
+
     dotX += (mouseX - dotX) * 0.3;
     dotY += (mouseY - dotY) * 0.3;
     outlineX += (mouseX - outlineX) * 0.15;
     outlineY += (mouseY - outlineY) * 0.15;
+    targetX += (mouseX - targetX) * 0.35;
+    targetY += (mouseY - targetY) * 0.35;
+
     dot.style.left = dotX + 'px';
     dot.style.top = dotY + 'px';
     outline.style.left = outlineX + 'px';
     outline.style.top = outlineY + 'px';
+    target.style.left = targetX + 'px';
+    target.style.top = targetY + 'px';
+    readout.style.left = targetX + 'px';
+    readout.style.top = targetY + 'px';
+
     let prevX = dotX, prevY = dotY;
     trails.forEach((trail, i) => {
       trail.x += (prevX - trail.x) * (0.35 - i * 0.04);
@@ -94,6 +111,7 @@ function isInViewport(el) {
       prevX = trail.x;
       prevY = trail.y;
     });
+
     requestAnimationFrame(animateCursor);
   }
   animateCursor();
