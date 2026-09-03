@@ -807,6 +807,24 @@ contactForm.querySelectorAll('input, textarea').forEach(input => {
   });
 })();
 
+// Copy phone
+(function initCopyPhone() {
+  const btn = document.getElementById('copyPhoneBtn');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const phone = btn.getAttribute('data-copy');
+    try { await navigator.clipboard.writeText(phone); }
+    catch (err) {
+      const temp = document.createElement('textarea');
+      temp.value = phone; temp.style.position = 'fixed'; temp.style.opacity = '0';
+      document.body.appendChild(temp); temp.select(); document.execCommand('copy'); temp.remove();
+    }
+    btn.classList.add('copied'); btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+    Toast.show('Phone number copied to clipboard.', 'success', 'Copied');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<i class="fa-regular fa-copy"></i>'; }, 2000);
+  });
+})();
+
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
